@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group 'aspect'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    compile 'org.springframework:spring-context:5.1.9.RELEASE'
+    compile 'org.springframework:spring-test:5.1.9.RELEASE'
+
+    compile 'org.aspectj:aspectjrt:1.7.2'
+    compile 'org.aspectj:aspectjweaver:1.7.2'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+}
