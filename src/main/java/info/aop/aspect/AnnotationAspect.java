@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class AnnotationAspect {
 
-    @Pointcut("@annotation(info.AdviceRequired)")
+    @Pointcut("@annotation(info.aop.AdviceRequired)")
     public void annotationMethod() {
     }
 

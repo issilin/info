@@ -1,6 +1,6 @@
 package info.aop.bean;
 
-import info.AdviceRequired;
+import info.aop.AdviceRequired;
 import org.springframework.stereotype.Component;
 
 @Component
