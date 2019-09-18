@@ -1,10 +1,12 @@
 package info.aop.config;
 
-import info.aop.aspect.AllOverloadMethodAspect;
-import info.aop.aspect.AnnotationAspect;
-import info.aop.aspect.ClassMethodAspect;
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import info.aop.aspect.*;
 import info.aop.bean.AnnotationBean;
 import info.aop.bean.BeanOne;
+import info.aop.bean.ModifiedBean;
+import org.springframework.aop.IntroductionAdvisor;
+import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -36,5 +38,27 @@ public class AppConfig {
     @Bean
     public AnnotationBean annotationBean() {
         return new AnnotationBean();
+    }
+
+    @Bean
+    public IsModifiedMixin modifiedAspect() {
+        return new IsModifiedMixin();
+    }
+
+    /**
+     * Создается проксли для использования бина с введением.
+     **/
+    @Bean
+    public ModifiedBean modifiedBean() {
+        ModifiedBean result = new ModifiedBean();
+
+        IntroductionAdvisor advisor = new IsModifiedAdvisor();
+
+        ProxyFactory pf = new ProxyFactory();
+        pf.setTarget(result);
+        pf.addAdvisor(advisor);
+        pf.setOptimize(true);
+
+        return (ModifiedBean) pf.getProxy();
     }
 }
